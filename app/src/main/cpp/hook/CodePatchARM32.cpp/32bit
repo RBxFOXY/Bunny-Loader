@@ -1,0 +1,34 @@
+
+#include "hook/CodePatch.h"
+
+namespace bl::runtime {
+
+int patchCompareLimit(const MethodInfo*, uint32_t, uint32_t, bool, bool) {
+    return 0;
+}
+
+std::string describeCompareMiss(const MethodInfo*, uint32_t, uint32_t, bool, bool) {
+    return "ARM32: compare patching not implemented";
+}
+
+std::string describeMethodCode(const MethodInfo*) {
+    return "ARM32: instruction inspection not implemented";
+}
+
+int patchLoopEnd(const MethodInfo*, uint32_t, uint32_t, bool) {
+    return 0;
+}
+
+int patchRegisterLimit(const MethodInfo*, uint32_t, uint32_t) {
+    return 0;
+}
+
+int patchMovImmediate(const MethodInfo*, uint32_t, uint32_t) {
+    return 0;
+}
+
+bool replaceInstruction(const void*, size_t, uint32_t, uint32_t) {
+    return false;
+}
+
+}
