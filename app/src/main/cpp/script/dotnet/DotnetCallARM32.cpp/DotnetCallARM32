@@ -1,0 +1,24 @@
+
+#include "script/dotnet/DotnetCall.h"
+
+namespace bl::dotnet {
+
+namespace {
+thread_local const char* t_lastError = "ARM32 native call bridge not implemented";
+}
+
+int32_t callGame(void* fn, CallFrame* frame) {
+    if (!fn || !frame) {
+        t_lastError = "invalid function or frame";
+        return 0;
+    }
+
+    t_lastError = "ARM32 ABI bridge is not yet implemented";
+    return 0;
+}
+
+const char* lastCallError() {
+    return t_lastError;
+}
+
+}
