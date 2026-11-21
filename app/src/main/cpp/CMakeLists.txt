@@ -18,13 +18,22 @@ file(GLOB_RECURSE BL_ASM_SOURCES CONFIGURE_DEPENDS
 )
 
 if(ANDROID_ABI STREQUAL "armeabi-v7a")
+
     list(FILTER BL_SOURCES EXCLUDE REGEX "/CodePatch\\.cpp$")
+    list(FILTER BL_SOURCES EXCLUDE REGEX "/DotnetCall\\.cpp$")
+    list(FILTER BL_SOURCES EXCLUDE REGEX "/GuardedCall\\.cpp$")
+
     list(FILTER BL_ASM_SOURCES EXCLUDE REGEX ".*")
 
     add_compile_definitions(BL_ARM32=1)
+
 elseif(ANDROID_ABI STREQUAL "arm64-v8a")
+
     list(FILTER BL_SOURCES EXCLUDE REGEX "/CodePatchARM32\\.cpp$")
+    list(FILTER BL_SOURCES EXCLUDE REGEX "/DotnetCallARM32\\.cpp$")
+
     add_compile_definitions(BL_ARM64=1)
+
 else()
     message(FATAL_ERROR "Unsupported ABI: ${ANDROID_ABI}")
 endif()
