@@ -1,0 +1,36 @@
+
+#include "il2cpp/GuardedCall.h"
+
+namespace bl::il2cpp {
+
+bool guardedCall(void (*body)(void*), void* arg, Caught* caught) {
+    if (!body) {
+        if (caught) {
+            caught->threw = false;
+            caught->exception = nullptr;
+            caught->cppType = nullptr;
+        }
+        return false;
+    }
+
+    if (caught) {
+        *caught = Caught{};
+    }
+
+    body(arg);
+    return true;
+}
+
+std::string describeCaught(const Caught& caught) {
+    if (!caught.threw) {
+        return "ARM32: no captured exception";
+    }
+
+    return caught.cppType ? caught.cppType : "ARM32: exception";
+}
+
+std::string describeException(Il2CppObject*) {
+    return "ARM32: exception description unavailable";
+}
+
+}
